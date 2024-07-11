@@ -92,24 +92,27 @@ public class PeliculaServlet extends HttpServlet {
 		  }
 		  
 	  }
+
 	
-	  //Este metodo es para actualizar una pelicula
-	  protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-	  {
+	  //Este metodo es para actualizar una pelicula  
+	  
+	  @Override
+	   protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	  {	  
+	  
 		  try
 		  {
-			  Pelicula pelicula =objectMapper.readValue(req.getReader(),Pelicula.class);//Esto es para que lea todo lo que hay en req. Y me convierte los datos en clase de tipo pelicula
-			  
+			  Pelicula pelicula = objectMapper.readValue(req.getReader(), Pelicula.class);
 			  peliculaService.updatePelicula(pelicula);
-			  
-			  resp.setStatus(HttpServletResponse.SC_CREATED);  //Devolve el estatus de lo que paso aca para ver si el dato se inserto correctamente
+			
 		  }
 		  catch(SQLException|ClassNotFoundException e)
 		  {
 			  resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-		  }
-		  
+		  }		  
 	  }
+	 
+	  
 	
 	  @Override
 	  protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  
